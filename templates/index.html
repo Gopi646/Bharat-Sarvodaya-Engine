@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bharat Sarvodaya Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand-mark">BS</div><div class="brand"><b>Bharat</b><span>Sarvodaya Engine</span></div>
+  <div class="nav-label">WORKSPACE</div>
+  <a class="nav active" href="#overview">▦ <span>Overview</span></a>
+  <a class="nav" href="#analyzer">✳ <span>Opportunity Engine</span></a>
+  <a class="nav" href="#simulator">◷ <span>Impact Simulator</span></a>
+  <a class="nav" href="#history">▤ <span>Scenario History</span></a>
+  <div class="sidebar-bottom"><div class="status-dot"></div><span>Prototype system online</span></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="eyebrow">COMMUNITY INTELLIGENCE PLATFORM</div><h1>Good ideas start <span>locally.</span></h1></div><div class="profile"><div class="avatar">CA</div><div><b>Code Avengers</b><small>Project workspace</small></div></div></header>
+<section id="overview" class="hero">
+ <div class="hero-copy"><div class="pill"><i></i> DEVELOPMENT FOR EVERYONE</div><h2>Turn local challenges<br>into <em>local opportunities.</em></h2><p>Connect community needs, existing resources and people’s skills to explore practical, sustainable development ideas.</p><a class="primary-btn" href="#analyzer">Explore opportunities <span>↗</span></a></div>
+ <div class="hero-art"><div class="orbit orbit1"></div><div class="orbit orbit2"></div><div class="globe">✳</div><div class="float-card card-a"><span>↗</span><div><b>Local resources</b><small>Find hidden potential</small></div></div><div class="float-card card-b"><span>♧</span><div><b>People & skills</b><small>Build opportunities</small></div></div><div class="art-caption">ONE COMMUNITY · MANY POSSIBILITIES</div></div>
+</section>
+<section class="stats-grid">
+ <div class="stat"><div class="stat-icon violet">⌘</div><div><small>Scenarios explored</small><strong id="scenarioCount">{{ total }}</strong><span class="stat-foot">Saved in this prototype</span></div></div>
+ <div class="stat"><div class="stat-icon green">◎</div><div><small>Core intelligence</small><strong>4 inputs</strong><span class="stat-foot">Needs · Resources · Skills · Demand</span></div></div>
+ <div class="stat"><div class="stat-icon orange">↗</div><div><small>Development focus</small><strong>Local-first</strong><span class="stat-foot">Inclusive & sustainable growth</span></div></div>
+</section>
+<section id="analyzer" class="section">
+ <div class="section-heading"><div><div class="eyebrow">01 / OPPORTUNITY GENERATOR</div><h2>Understand your community</h2><p>Describe a real or sample community to generate possible interventions.</p></div><span class="tag">EXPLAINABLE PROTOTYPE</span></div>
+ <div class="workspace">
+  <form id="analyzeForm" class="input-panel">
+   <label>Community name<input id="community" value="Greenfield Village" placeholder="e.g. Greenfield Village"></label>
+   <label>Community problem<textarea id="problem" required>Farmers have unsold vegetables and few local jobs</textarea></label>
+   <label>Available resources<textarea id="resources" required>Agricultural by-products, unused community building</textarea></label>
+   <label>People & skills<input id="skills" value="25 local youth, basic technical skills"></label>
+   <label>Local demand<input id="demand" value="Affordable food processing and packaging"></label>
+   <div class="button-row"><button class="primary-btn full" type="submit">Generate opportunities <span>✦</span></button><button class="secondary-btn" type="button" id="resetBtn">Reset</button></div>
+   <p class="form-hint">Use sample data or enter details from a community survey.</p>
+  </form>
+  <div class="results-panel"><div class="result-top"><div><div class="eyebrow">ENGINE OUTPUT</div><h3>Opportunity insights</h3></div><div class="result-actions"><button class="secondary-btn" type="button" id="reportBtn" disabled>Download report ↗</button><span class="live"><i></i> Ready</span></div></div>
+   <div id="results" class="empty-state"><div class="empty-icon">✳</div><h3>Your insights will appear here</h3><p>Enter community details and run the engine to see suggested opportunities, next steps and modeled impact.</p><button type="button" class="text-btn" id="sampleBtn">Load sample scenario ↗</button></div>
+  </div>
+ </div>
+</section>
+<section id="simulator" class="section">
+ <div class="section-heading"><div><div class="eyebrow">02 / WHAT-IF SIMULATOR</div><h2>Explore the possible impact</h2><p>Adjust assumptions to see an illustrative scenario estimate.</p></div></div>
+ <div class="sim-card"><div class="sim-controls">
+  <label>Local workforce <output id="workersOut">25 people</output><input id="workers" type="range" min="5" max="100" value="25" step="5"></label>
+  <label>Estimated local demand <output id="demandOut">60%</output><input id="demandRange" type="range" min="10" max="100" value="60" step="5"></label>
+  <label>Resource availability <output id="resourceOut">70%</output><input id="resourceRange" type="range" min="10" max="100" value="70" step="5"></label>
+  <p class="form-hint">Illustrative model only — not a forecast or guarantee.</p>
+ </div><div class="sim-results"><div class="sim-result"><small>Potential roles supported</small><strong id="jobsOut">8</strong><span>Modeled estimate</span></div><div class="sim-result"><small>Readiness index</small><strong id="readinessOut">42%</strong><div class="meter"><i id="meterFill"></i></div></div><div class="sim-result"><small>Resource utilization</small><strong id="utilOut">70%</strong><span>Assumed availability</span></div></div></div>
+ <div class="chart-card"><div><div class="eyebrow">LIVE SCENARIO VISUALIZATION</div><h3>Assumption impact overview</h3></div><div class="chart-wrap"><canvas id="impactChart"></canvas></div></div>
+</section>
+
+<section id="compare" class="section">
+ <div class="section-heading"><div><div class="eyebrow">03 / SCENARIO COMPARISON</div><h2>Compare community scenarios</h2><p>Choose two saved scenarios to compare their recorded inputs and readiness indicators.</p></div></div>
+ <div class="compare-card">
+  <div class="compare-controls">
+   <label>Scenario A<select id="scenarioA"><option value="">Load saved scenarios…</option></select></label>
+   <label>Scenario B<select id="scenarioB"><option value="">Load saved scenarios…</option></select></label>
+   <button class="primary-btn" id="compareBtn" type="button">Compare scenarios ↔</button>
+  </div>
+  <div id="compareResult" class="compare-empty">Generate at least two scenarios to compare them here.</div>
+ </div>
+</section>
+
+<section id="history" class="section"><div class="section-heading"><div><div class="eyebrow">04 / RECENT ACTIVITY</div><h2>Scenario history</h2><p>Previously generated opportunity scenarios.</p></div></div>
+ <div class="history-card"><div class="history-head"><span>COMMUNITY</span><span>PRIMARY OPPORTUNITY</span><span>CREATED</span></div><div id="historyRows">{% for row in recent %}<div class="history-row"><b>{{ row[0] }}</b><span>{{ row[1] }}</span><small>{{ row[2] }}</small></div>{% else %}<div class="history-empty">No scenarios yet. Generate your first opportunity above.</div>{% endfor %}</div></div>
+</section>
+<footer>BHARAT SARVODAYA ENGINE <span>Built for inclusive, sustainable community development · Code Avengers</span></footer>
+</main>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body></html>
